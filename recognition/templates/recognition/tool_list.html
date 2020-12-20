@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tools
+{% endblock %}
+
+{% block main %}
+
+<br>
+<div class="alert alert-info" role="alert">
+    <h1> Recognition models </h1>
+</div>
+
+<div class="container-fluid">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Tool name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Process geodata</th>
+            <th scope="col">Price</th>
+            <th scope="col">Created</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <th scope="row">{{ object.id }}</th>
+            <td>{{object.name}}</td>
+            <td>{{object.tool_type.name}}</td>
+            <td>{{object.tool_type.proc_geodata}}</td>
+            <td>{{object.price}}</td>
+            <td>{{object.created}}</td>
+            <td><a href="{% url 'recognition:tool_info' object.id %}">extra</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

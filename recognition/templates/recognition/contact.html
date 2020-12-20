@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block main %}
+
+<br>
+<div class="alert alert-info" role="alert">
+    <h3> Contact us </h3>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+{% endblock %}

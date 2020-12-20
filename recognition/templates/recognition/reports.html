@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Reports
+{% endblock %}
+
+{% block main %}
+
+<br>
+<div class="alert alert-info" role="alert">
+    <h3> Download reports</h3>
+</div>
+
+<hr>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Save and send</button>
+</form>
+
+{% endblock %}<br>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Log in
+{% endblock %}
+
+{% block main %}
+<br>
+<div class="alert alert-info" role="alert">
+    <h3> Log in </h3>
+</div>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+{% endblock %}

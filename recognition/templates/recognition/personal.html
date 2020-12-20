@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Personal
+{% endblock %}
+
+{% block main %}
+<br>
+<div class="alert alert-info" role="alert">
+    <h3> My data</h3>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Order</th>
+<!--      <th scope="col">Image</th>-->
+      <th scope="col">Status</th>
+      <th scope="col">Process</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for order in orders %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>id {{order.pk}}</td>
+      <td>{{order.task_id}} {{order.task_status}}</td>
+      <td>
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Proc</button></form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<!--<hr>-->
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <button type="submit" class="btn btn-primary">Send mail</button>-->
+<!--</form>-->
+
+<!--<br>-->
+<!--{% if task_id %}-->
+<!--Отследить задачу <a href="/task_status/?task_id={{task_id}}">{{task_id}}</a>-->
+<!--{% endif %}-->
+
+<!--{% for image in images %}-->
+<!--<li>{{image.pk}} {{image.img}}-->
+<!--    <img width="50px" height="50px" src="{{ image.img.url }}">-->
+<!--</li>-->
+<!--{% endfor %}-->
+
+{% endblock %}

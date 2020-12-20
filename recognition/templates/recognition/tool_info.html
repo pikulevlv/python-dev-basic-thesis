@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Tool {{object.id}}
+{% endblock %}
+
+{% block main %}
+<br>
+<div class="alert alert-info" role="alert">
+    <h3> Tool #{{object.pk}} </h3>
+</div>
+
+<br>
+<li>id: {{object.pk}} | type: {{object.tool_type.name}} |
+    name: {{object.name}}</li>
+
+
+{% endblock %}

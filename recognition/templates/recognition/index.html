@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Main
+{% endblock %}
+
+{% block main %}
+
+<br>
+<div class="container-fluid">
+    {% if user.first_name %}
+    <p class="text-left"><i>Hello, {{user.first_name}} {{user.last_name}}</i>!</p>
+    {% else %}
+    <p class="text-left"><i>Hello!</i></p>
+    {% endif %}
+</div>
+<br>
+
+<div class="container-fluid">
+  <p class="figa"><img class="img-center" width="500px"
+          src="./../../static/static_images/logo_alpha.png"
+          alt="eoScan"></p>
+</div>
+<br>
+<hr>
+<br>
+
+  <div class="container marketing">
+
+    <div class="row">
+      <div class="col-lg-4">
+        <img class="img rounded-circle" width="140" height="140" src="./../../static/static_images/kuku.jpeg"><title>Placeholder</title>
+
+        <h4>The definition of quality for germination of crops</h4>
+        <p>A set of tools for recognizing anomalies in the development
+          of agricultural crops, damage from pests, etc.
+        </p>
+        <p><a class="btn btn-secondary" href="{% url 'recognition:tooltype_list' %}#level-1" role="button">More details &raquo;</a></p>
+      </div>
+      <div class="col-lg-4">
+        <img class="img rounded-circle" width="140" height="140" src="./../../static/static_images/kust.png"><title>Placeholder</title>
+
+        <h4>Determination of areas occupied by agricultural crops</h4>
+        <p>Determine the areas occupied by agricultural crops and the areas occupied by shrubs and forests.</p>
+        <p><a class="btn btn-secondary" href="{% url 'recognition:tooltype_list' %}#level-2" role="button">More details &raquo;</a></p>
+      </div>
+      <div class="col-lg-4">
+        <img class="img rounded-circle" width="140" height="140" src="./../../static/static_images/vshod.png"><title>Placeholder</title>
+
+        <h4>The determination of the distances between the sprouts</h4>
+        <p>Find deviations from technological distances, omissions, and doubles. Find out the proportion of plants outside the rows.
+        </p>
+        <p><a class="btn btn-secondary" href="{% url 'recognition:tooltype_list' %}#level-3" role="button">More details &raquo;</a></p>
+      </div>
+    </div>
+
+{% endblock %}

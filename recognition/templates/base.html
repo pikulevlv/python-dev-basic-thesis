@@ -1,0 +1,121 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+          crossorigin="anonymous">
+  </script>
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7 /js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+  <link rel="icon" href="{% static 'static_images/favicon.ico' %}" type="image/x-icon">
+
+<style>
+.figa {
+text-align: center; /* Выравнивание по центру */
+}
+</style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <div class="container-fluid">
+
+  <a class="navbar-brand" href="/">
+    <img class="img" width="140px"
+      height="50px" src="./../../static/static_images/logo_alpha.png"
+      alt="eoScan"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if active_page == 'Tools' %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'recognition:tool_list' %}">All Tools</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'recognition:tool_list' %}">All Tools</a>
+      </li>
+      {% endif %}
+
+      {% if active_page == 'Tool types' %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'recognition:tooltype_list' %}">Tool types</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'recognition:tooltype_list' %}">Tool types</a>
+      </li>
+      {% endif %}
+
+
+      {% if active_page == 'Orders' %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'recognition:order_list' %}">Orders</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'recognition:order_list' %}">Orders</a>
+      </li>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'recognition:logout' %}">Log out</a>
+      </li>
+      {% else %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'recognition:login' %}">Log in</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'recognition:registry' %}">Registry</a>
+      </li>
+
+      {% endif %}
+    </ul>
+  </div>
+ </div>
+
+</nav>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+<div class="container-fluid">
+    {% block main %}
+    {% endblock %}
+</div>
+
+
+{% block after_main %}
+
+<footer class="text-muted py-5">
+  <div class="container-fluid">
+    <p class="float-right mb-1">
+      <a href="#">Page up</a>
+    </p>
+    <p class="mb-1">© eoScan 2020</p>
+    <p class="mb-0">Do you need another model to solve your recognition task ?
+      <a href="{% url 'recognition:contact' %}">Contact us</a>
+      or read description of <a href="{% url 'recognition:tool_list' %}">models</a>.</p>
+    <p class="mb-1">
+      <a href="{% url 'recognition:about' %}">About</a> the project
+    </p>
+  </div>
+  </footer>
+<!--<script src="{% static 'css/bootstrap.bundle.min.js' %}"></script>-->
+{% endblock %}
+</body>
+</html>

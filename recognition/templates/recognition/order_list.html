@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+
+{% block title %}
+Orders
+{% endblock %}
+
+{% block main %}
+<br>
+<div class="alert alert-info" role="alert">
+    <h3>My orders</h3>
+</div>
+
+<a class="btn btn-primary" href="{% url 'recognition:order_create' %}">
+    Create new
+</a>
+
+<br>
+<br>
+
+<div class="container-fluid">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Tool</th>
+            <th scope="col">Status</th>
+            <th scope="col">Process geodata</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Created</th>
+            <th scope="col">Info</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in object_list %}
+        <tr>
+            <th scope="row">{{ order.id }}</th>
+            <td>{{order.tool.name}}</td>
+            <td>{{order.task_status}}</td>
+            <td>{{order.tool.tool_type.proc_geodata}}</td>
+            {% if order.img %}
+            <td><img width="50px" height="50px" src="{% thumbnail order.img 'default' %}"></td>
+            {% else %}
+            <td> --- </td>
+            {% endif %}
+            <td>{{order.tool.price}}</td>
+            <td>{{order.created}}</td>
+
+            <td>
+                    <a href="{% url 'recognition:order_detail' order.id %}">extra</a>
+            </td>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div>
+    {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}">&lt</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    {% endif %}
+    Part {{ page.number }} from {{ page.paginator.num_pages }}
+    {% if page.has_next %}
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="?page={{ page.next_page_number }}">&gt</a>
+    {% endif %}
+</div>
+
+
+<hr>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Download report</button>
+</form>
+
+
+{% endblock %}

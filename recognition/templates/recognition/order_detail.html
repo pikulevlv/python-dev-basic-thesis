@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+
+{% block title %}
+Order {{object.id}}
+{% endblock %}
+
+{% block main %}
+<br>
+<div class="alert alert-info" role="alert">
+    <h3> Order # {{object.pk}}</h3>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm">
+        <h3 class="figa">Image: </h3>
+        <p class="figa">
+            <img width="500px" src="{% thumbnail object.img 'default' %}">
+        </p>
+    </div>
+    <div class="col-sm">
+        <h3 class="figa">Data: </h3>
+        <table class="table table-primary">
+          <thead>
+            <th scope="col">Feature</th>
+            <th scope="col">Value</th>
+          </thead>
+          <tbody>
+            <tr class="table-active">
+                    <th scope="row">id</th>
+                    <td>{{object.pk}}</td>
+            </tr>
+            <tr class="table">
+                <th scope="row">Shape</th>
+                <td>{{object.width}} x {{object.height}}</td>
+            </tr>
+                <tr class="table-active">
+                <th scope="row">Size</th>
+                <td>{{object.size|filesizeformat}}</td>
+            </tr>
+                <tr class="table">
+                <th scope="row">File name</th>
+                <td>{{object.img.name}}</td>
+            </tr>
+                <tr class="table-active">
+                <th scope="row">Tool</th>
+                <td>{{object.tool}}</td>
+            </tr>
+                <tr class="table">
+                <th scope="row">Created</th>
+                <td>{{object.created}}</td>
+            </tr>
+            </tr>
+                <tr class="table-active">
+                <th scope="row">Extension</th>
+                <td>{{object.extension}}</td>
+            </tr>
+            </tr>
+                <tr class="table">
+                <th scope="row">Task id</th>
+                <td>{{object.task_id}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<hr>
+{% if object.task_id %}
+<br>
+<br>
+<a href="{% url 'recognition:order_download' object.id %}">
+    Download result
+</a>
+{% else %}
+<br>
+<br>
+<a class="btn btn-primary" href="{% url 'recognition:order_update' object.id %}">
+    Update
+</a>
+
+<br>
+<br>
+<form method="post" action="{% url 'recognition:order_detail' object.id %}">
+{% csrf_token %}
+<button type="submit" class="btn btn-primary">Process</button>
+</form>
+
+<br>
+<a class="btn btn-danger" href="{% url 'recognition:order_delete' object.id %}">
+    Delete
+</a>
+{% endif %}
+
+
+{% endblock %}

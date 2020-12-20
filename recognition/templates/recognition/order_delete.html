@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    '{{object.name}}' delete
+{% endblock %}
+
+{% block main %}
+    <div class="alert alert-info" role="alert">
+        <h1> Delete order </h1>
+    </div>
+    Are you shure to delete order {{object.id}}?
+
+
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-danger">Yes</button>
+    </form>
+
+
+{% endblock %}
